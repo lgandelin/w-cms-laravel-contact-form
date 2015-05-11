@@ -1,0 +1,18 @@
+{
+    "name": "webaccess/w-cms-laravel-contact-form",
+    "type": "module",
+    "time" : "2015-05-10",
+    "description": "W CMS Laravel - Contact form module",
+    "authors": [
+        {
+            "name": "Louis Gandelin",
+            "email": "lgandelin@web-access.fr"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Webaccess\\WCMSLaravelContactForm\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
