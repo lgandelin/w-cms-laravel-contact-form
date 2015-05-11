@@ -3,7 +3,6 @@
 namespace Webaccess\WCMSLaravelContactForm\Http\Controllers;
 
 use Webaccess\WCMSLaravel\Http\Controllers\Front\FrontController;
-use Webaccess\WCMSLaravel\Helpers\ShortcutHelper;
 
 class ContactController extends FrontController
 {
@@ -16,16 +15,26 @@ class ContactController extends FrontController
         ];
 
         try {
-            \Mail::send('emails.contact-form', $aParams, function($message)
+            \Mail::send('modules.contact-form.emails.contact-form', $aParams, function($message)
             {
                 $recipientEmail = config('vendor.w-cms-laravel-contact-form.contact-form-recipient-email');
                 $recipientName = config('vendor.w-cms-laravel-contact-form.contact-form-recipient-name');
-                $subject = config   ('vendor.w-cms-laravel-contact-form.contact-form-subject');
+                $subject = config('vendor.w-cms-laravel-contact-form.contact-form-subject');
 
                 $message->to($recipientEmail, $recipientName)->subject($subject);
             });
+
+            $response = [
+                'success' => true,
+                'message' => trans('w-cms-laravel-contact-form::contact-form.mail_send_with_success')
+            ];
         } catch(\Exception $e) {
-            dd($e->getMessage());
+            $response = [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $response;
     }
-} 
+}
