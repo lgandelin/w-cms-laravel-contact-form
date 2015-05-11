@@ -20,15 +20,19 @@ class WCMSLaravelContactFormServiceProvider extends ServiceProvider {
         ], 'config');
 
         $this->publishes([
-            __DIR__. '/../../resources/lang' => 'resources/lang/modules/contact-form'
-        ], 'langs');
-
-        $this->publishes([
             __DIR__. '/../../resources/views/partials' => 'themes/' . env('W_CMS_THEME', 'w-cms-base-theme') . '/views/partials',
             __DIR__. '/../../resources/views/emails' => 'resources/views/modules/contact-form/emails'
         ], 'views');
 
+        $this->publishes([
+            __DIR__. '/../../resources/lang' => 'resources/lang/modules/contact-form'
+        ], 'langs');
+
         $this->loadTranslationsFrom(base_path() . '/resources/lang/modules/contact-form', 'w-cms-laravel-contact-form');
+
+        $this->publishes([
+            __DIR__. '/../../resources/assets' => 'resources/assets/modules/contact-form'
+        ], 'assets');
     }
 
     /**

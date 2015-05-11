@@ -1,3 +1,3 @@
 <?php
 
-Route::post('/contact/', array('as' => 'contact_form_contact', 'uses' => 'Webaccess\WCMSLaravelContactForm\Http\Controllers\ContactController@contact'));
+Route::post('/contact/', array('as' => 'contact_form_controller', 'uses' => 'Webaccess\WCMSLaravelContactForm\Http\Controllers\ContactController@contact'));

@@ -1,4 +1,4 @@
-<form action="{{ route('contact_form_contact') }}" method="post">
+<form action="{{ route('contact_form_controller') }}" method="post">
     <p>
         <label for="name">Your name</label>
         <input type="text" id="name" name="name"/>
@@ -17,3 +17,5 @@
     <input type="submit" value="Send" />
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 </form>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
