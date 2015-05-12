@@ -15,12 +15,14 @@ class WCMSLaravelContactFormServiceProvider extends ServiceProvider {
     {
         include(__DIR__ . '/Http/routes.php');
 
+        $themeFolder = 'themes/' . env('W_CMS_THEME', 'w-cms-base-theme');
+
         $this->publishes([
             __DIR__. '/../../config/config.php' => config_path('vendor/w-cms-laravel-contact-form.php')
         ], 'config');
 
         $this->publishes([
-            __DIR__. '/../../resources/views/partials' => 'themes/' . env('W_CMS_THEME', 'w-cms-base-theme') . '/views/partials',
+            __DIR__. '/../../resources/views/partials' => $themeFolder . '/views/partials',
             __DIR__. '/../../resources/views/emails' => 'resources/views/modules/contact-form/emails'
         ], 'views');
 
