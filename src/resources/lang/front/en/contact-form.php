@@ -5,5 +5,5 @@ return [
     'send' => 'Send',
     'your_message' => 'Your message',
     'your_email' => 'Your email',
-    'your_name' => 'Your name',
+    'your_name' => 'Your name'
 ];
