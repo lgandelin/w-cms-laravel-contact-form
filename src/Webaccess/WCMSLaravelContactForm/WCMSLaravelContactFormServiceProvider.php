@@ -17,7 +17,7 @@ class WCMSLaravelContactFormServiceProvider extends WCMSLaravelModuleServiceProv
 
     public function register()
     {
-        Context::add('block_contact_form', new JSONBlockContactFormRepository());
+        Context::add('block_contact_form_repository', new JSONBlockContactFormRepository());
     }
 
     public function install()
