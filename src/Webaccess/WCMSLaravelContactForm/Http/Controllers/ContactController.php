@@ -8,20 +8,22 @@ class ContactController extends FrontController
 {
     public function contact()
     {
+        $senderEmail = \Input::get('mail');
+        $senderName = \Input::get('name');
         $aParams = [
-            'sender_name' => \Input::get('name'),
-            'sender_email' => \Input::get('mail'),
+            'sender_name' => $senderName,
+            'sender_email' => $senderEmail,
             'sender_message' => \Input::get('message')
         ];
 
         try {
-            \Mail::send('w-cms-laravel-contact-form::emails.contact-form', $aParams, function($message)
+            \Mail::send(\Shortcut::get_theme() . '::modules.contact-form.emails.contact-form', $aParams, function($message) use ($senderEmail, $senderName)
             {
                 $recipientEmail = config('vendor.w-cms-laravel-contact-form.contact-form-recipient-email');
                 $recipientName = config('vendor.w-cms-laravel-contact-form.contact-form-recipient-name');
                 $subject = config('vendor.w-cms-laravel-contact-form.contact-form-subject');
 
-                $message->to($recipientEmail, $recipientName)->subject($subject);
+                $message->from($senderEmail, $senderName)->to($recipientEmail, $recipientName)->subject($subject);
             });
 
             $response = [

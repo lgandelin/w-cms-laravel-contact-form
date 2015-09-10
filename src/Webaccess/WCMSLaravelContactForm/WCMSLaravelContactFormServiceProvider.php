@@ -2,8 +2,10 @@
 
 namespace Webaccess\WCMSLaravelContactForm;
 
+use Webaccess\WCMSCore\Context;
+use Webaccess\WCMSCore\Fixtures\BlockTypesFixtures;
 use Webaccess\WCMSLaravel\Helpers\WCMSLaravelModuleServiceProvider;
-use Webaccess\WCMSLaravelContactForm\BlockTypes\ContactFormBlockType;
+use Webaccess\WCMSLaravelContactForm\Repositories\JSONBlockContactFormRepository;
 
 class WCMSLaravelContactFormServiceProvider extends WCMSLaravelModuleServiceProvider {
 
@@ -11,6 +13,15 @@ class WCMSLaravelContactFormServiceProvider extends WCMSLaravelModuleServiceProv
     {
         include(__DIR__ . '/Http/routes.php');
         parent::initModule('contact-form', __DIR__ . '/../../');
-        $this->app->make('block_type')->addBlockType(new ContactFormBlockType());
+    }
+
+    public function register()
+    {
+        Context::add('block_contact_form', new JSONBlockContactFormRepository());
+    }
+
+    public function install()
+    {
+        BlockTypesFixtures::addBlockType('contact_form', trans('w-cms-laravel-contact-form-back::contact-form.contact_form_block'), null, 'modules.contact-form.blocks.contact-form', null);
     }
 }
