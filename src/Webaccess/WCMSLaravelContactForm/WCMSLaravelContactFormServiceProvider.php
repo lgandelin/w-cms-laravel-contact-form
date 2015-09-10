@@ -2,10 +2,8 @@
 
 namespace Webaccess\WCMSLaravelContactForm;
 
-use Webaccess\WCMSCore\Context;
 use Webaccess\WCMSCore\Fixtures\BlockTypesFixtures;
 use Webaccess\WCMSLaravel\Helpers\WCMSLaravelModuleServiceProvider;
-use Webaccess\WCMSLaravelContactForm\Repositories\JSONBlockContactFormRepository;
 
 class WCMSLaravelContactFormServiceProvider extends WCMSLaravelModuleServiceProvider {
 
@@ -13,11 +11,6 @@ class WCMSLaravelContactFormServiceProvider extends WCMSLaravelModuleServiceProv
     {
         include(__DIR__ . '/Http/routes.php');
         parent::initModule('contact-form', __DIR__ . '/../../');
-    }
-
-    public function register()
-    {
-        Context::add('block_contact_form_repository', new JSONBlockContactFormRepository());
     }
 
     public function install()

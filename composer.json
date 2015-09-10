@@ -10,8 +10,9 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Webaccess\\WCMSLaravelContactForm\\": "src/"
+        "psr-4": {
+            "Webaccess\\WCMSLaravelContactForm\\": "src/",
+            "Webaccess\\WCMSCore\\": "src/"
         }
     },
     "minimum-stability": "dev"
