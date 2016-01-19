@@ -2,7 +2,9 @@
 
 namespace Webaccess\WCMSLaravelContactForm;
 
-use Webaccess\WCMSCore\Fixtures\BlockTypesFixtures;
+use Webaccess\WCMSCore\Context;
+use Webaccess\WCMSCore\DataStructure;
+use Webaccess\WCMSCore\Interactors\BlockTypes\CreateBlockTypeInteractor;
 use Webaccess\WCMSLaravel\Helpers\WCMSLaravelModuleServiceProvider;
 
 class WCMSLaravelContactFormServiceProvider extends WCMSLaravelModuleServiceProvider {
@@ -11,11 +13,19 @@ class WCMSLaravelContactFormServiceProvider extends WCMSLaravelModuleServiceProv
     {
         include(__DIR__ . '/Http/routes.php');
         parent::initModule('contact-form', __DIR__ . '/../../');
-        self::install();
+        self::createBlockType();
     }
 
-    public function install()
+    public function createBlockType()
     {
-        BlockTypesFixtures::addBlockType('contact_form', trans('w-cms-laravel-contact-form-back::contact-form.contact_form_block'), 'Webaccess\WCMSLaravelContactForm\Blocks\ContactFormBlock', null, null, 'modules.contact-form.blocks.contact-form', null);
+        if (!$blockType = Context::get('block_type_repository')->findByCode('contact_form')) {
+            $blockTypeStructure = new DataStructure();
+            $blockTypeStructure->code = 'contact_form';
+            $blockTypeStructure->name = trans('w-cms-laravel-contact-form-back::contact-form.contact_form_block');
+            $blockTypeStructure->entity = 'Webaccess\WCMSLaravelContactForm\Blocks\ContactFormBlock';
+            $blockTypeStructure->front_view = 'modules.contact-form.blocks.contact-form';
+
+            (new CreateBlockTypeInteractor())->run($blockTypeStructure);
+        }
     }
 }

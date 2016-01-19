@@ -17,7 +17,7 @@ class ContactController extends FrontController
         ];
 
         try {
-            \Mail::send(\Shortcut::get_theme() . '::modules.contact-form.emails.contact-form', $aParams, function($message) use ($senderEmail, $senderName)
+            \Mail::send(\Shortcut::getTheme() . '::modules.contact-form.emails.contact-form', $aParams, function($message) use ($senderEmail, $senderName)
             {
                 $recipientEmail = config('vendor.w-cms-laravel-contact-form.contact-form-recipient-email');
                 $recipientName = config('vendor.w-cms-laravel-contact-form.contact-form-recipient-name');
